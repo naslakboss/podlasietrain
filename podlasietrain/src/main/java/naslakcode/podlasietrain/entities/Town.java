@@ -16,8 +16,7 @@ public class Town {
     public Town() {
     }
 
-    public Town(Long townId, String name) {
-        this.townId = townId;
+    public Town( String name) {
         this.name = name;
     }
 

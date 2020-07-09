@@ -11,17 +11,16 @@ public class Train {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long trainId;
 
-    private Town placeOfDeparture;
+    private String start;
 
-    private Town placeOfArrival;
+    private String destination;
 
     public Train() {
     }
 
-    public Train(Long trainId, Town placeOfDeparture, Town placeOfArrival) {
-        this.trainId = trainId;
-        this.placeOfDeparture = placeOfDeparture;
-        this.placeOfArrival = placeOfArrival;
+    public Train( String start, String destination) {
+        this.start = destination;
+        this.start = destination;
     }
 
     public Long getTrainId() {
@@ -32,19 +31,19 @@ public class Train {
         this.trainId = trainId;
     }
 
-    public Town getPlaceOfDeparture() {
-        return placeOfDeparture;
+    public String getStart() {
+        return start;
     }
 
-    public void setPlaceOfDeparture(Town placeOfDeparture) {
-        this.placeOfDeparture = placeOfDeparture;
+    public void setStart(String start) {
+        this.start = start;
     }
 
-    public Town getPlaceOfArrival() {
-        return placeOfArrival;
+    public String getDestination() {
+        return destination;
     }
 
-    public void setPlaceOfArrival(Town placeOfArrival) {
-        this.placeOfArrival = placeOfArrival;
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 }

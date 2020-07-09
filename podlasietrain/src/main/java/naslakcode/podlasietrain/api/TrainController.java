@@ -15,7 +15,7 @@ import java.util.List;
 public class TrainController {
 
     @Autowired
-    TrainService trainService
+    TrainService trainService;
 
     @GetMapping("/all-trains")
     public List<Train> listOfTrains(){
