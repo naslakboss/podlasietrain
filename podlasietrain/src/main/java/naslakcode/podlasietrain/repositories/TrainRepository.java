@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TrainRepository extends CrudRepository<Train, Long> {
 
+    String findByUsername(String start);
+
 }

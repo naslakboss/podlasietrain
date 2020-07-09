@@ -25,7 +25,8 @@ public class TrainService {
       return (List<Train>) trainRepository.findAll();
     }
 
-    
 
-
+    public String findByUsername(String start) {
+        return trainRepository.findByUsername(start);
+    }
 }
