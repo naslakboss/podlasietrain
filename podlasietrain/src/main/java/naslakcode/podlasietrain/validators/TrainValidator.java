@@ -27,10 +27,10 @@ public class TrainValidator  implements Validator {
         if(train.getStart() == train.getDestination()){
             errors.rejectValue("start", "Duplicate.startAndDestination.start");
         }
-        if(train.getStart() == trainService.findByUsername(train.getStart())){
+        if(train.getStart() == trainService.findByStart(train.getStart())){
             errors.rejectValue("start", "Start.noExist");
         }
-        if(train.getDestination() == trainService.findByUsername(train.getDestination())){
+        if(train.getDestination() == trainService.findByDestination(train.getDestination())){
             errors.rejectValue("destination", "Destination.noExist");
         }
 

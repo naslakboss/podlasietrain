@@ -26,7 +26,11 @@ public class TrainService {
     }
 
 
-    public String findByUsername(String start) {
-        return trainRepository.findByUsername(start);
+    public String findByStart(String start) {
+        return trainRepository.findByStart(start);
+    }
+
+    public String findByDestination(String destination) {
+        return trainRepository.findByStart(destination);
     }
 }
