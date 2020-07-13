@@ -10,27 +10,14 @@ import java.util.List;
 @Service
 public class TrainService {
 
-
+    @Autowired
     TrainRepository trainRepository;
-
-    public TrainService(TrainRepository trainRepository) {
-        this.trainRepository = trainRepository;
-    }
 
     public Train save(Train train){
         return trainRepository.save(train);
     }
 
-    public List<Train> findAll() {
-      return (List<Train>) trainRepository.findAll();
-    }
-
-
-    public String findByStart(String start) {
-        return trainRepository.findByStart(start);
-    }
-
-    public String findByDestination(String destination) {
-        return trainRepository.findByStart(destination);
+    public List<Train> findALl(){
+        return trainRepository.findAll();
     }
 }

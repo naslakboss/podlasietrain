@@ -1,46 +1,55 @@
 package naslakcode.podlasietrain.entities;
 
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document
 public class Train {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long trainId;
 
-    private String start;
+    private int weight;
+    private Town startTown;
+    private Town targetTown;
+    @Id
+    private String connectionName;
 
-    private String destination;
-
-    public Train() {
+    public Train(int weight, Town startTown, Town targetTown) {
+        this.connectionName = startTown.getName() + "-" + targetTown.getName();
+        this.weight = weight;
+        this.startTown = startTown;
+        this.targetTown = targetTown;
     }
 
-    public Train( String start, String destination) {
-        this.start = destination;
-        this.start = destination;
+    public String getConnectionName() {
+        return connectionName;
     }
 
-    public Long getTrainId() {
-        return trainId;
+    public void setConnectionName(String connectionName) {
+        this.connectionName = connectionName;
     }
 
-    public void setTrainId(Long trainId) {
-        this.trainId = trainId;
+    public double getWeight() {
+        return weight;
     }
 
-    public String getStart() {
-        return start;
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
-    public void setStart(String start) {
-        this.start = start;
+    public Town getStartTown() {
+        return startTown;
     }
 
-    public String getDestination() {
-        return destination;
+    public void setStartTown(Town startTown) {
+        this.startTown = startTown;
     }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
+    public Town getTargetTown() {
+        return targetTown;
+    }
+
+    public void setTargetTown(Town targetTown) {
+        this.targetTown = targetTown;
     }
 }
+

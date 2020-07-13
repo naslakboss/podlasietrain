@@ -1,31 +1,26 @@
 package naslakcode.podlasietrain.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-public class Town {
+import java.util.ArrayList;
+import java.util.List;
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long townId;
+@Document
+public class Town implements Comparable<Town> {
 
+// Klasa głowna implementuje Comparable -> compareTo
+    @Id
     private String name;
+    private List<Train> trains;
+    private boolean visited;
+    private Town previousTown;
+    private double minDistance = Double.MAX_VALUE;
+//  Obiekt Miasta posiada nazwe, krawędzie, odwiedzone poprzednie
 
-    public Town() {
-    }
-
-    public Town( String name) {
+    public Town(String name) {
         this.name = name;
-    }
-
-    public Long getTownId() {
-        return townId;
-    }
-
-    public void setTownId(Long townId) {
-        this.townId = townId;
+        this.trains = new ArrayList<>();
     }
 
     public String getName() {
@@ -34,5 +29,51 @@ public class Town {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void addNeighbour(Train train) {
+        this.trains.add(train);
+    }
+
+    public List<Train> getTrains() {
+        return trains;
+    }
+
+    public void setTrains(List<Train> trains) {
+        this.trains = trains;
+    }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
+    public Town getPreviousTown() {
+        return previousTown;
+    }
+
+    public void setPreviousTown(Town previousTown) {
+        this.previousTown = previousTown;
+    }
+
+    public double getMinDistance() {
+        return minDistance;
+    }
+
+    public void setMinDistance(double minDistance) {
+        this.minDistance = minDistance;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    @Override
+    public int compareTo(Town otherTown) {
+        return Double.compare(this.minDistance, otherTown.minDistance);
     }
 }
