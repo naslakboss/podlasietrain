@@ -18,6 +18,18 @@ public class TownService {
         return townRepository.findAll();
     }
 
+    public Iterable<Town> saveAll(Iterable<Town> townToAdd) {
+       return townRepository.saveAll(townToAdd);
+    }
+
+    public Town findById(String id) {
+        Optional<Town> getTown = townRepository.findById(id);
+        if(getTown.isPresent()){
+             return getTown.get();
+        }
+        return new Town("id");
+    }
+
 //
 //    public Town findById() {
 //    }
