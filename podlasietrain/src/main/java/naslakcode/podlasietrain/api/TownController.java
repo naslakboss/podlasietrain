@@ -17,8 +17,6 @@ import java.util.List;
 @RequestMapping("/towns")
 public class TownController {
 
-    @Autowired
-    TownRepository townRepository;
 
     @Autowired
     TownService townService;
@@ -32,6 +30,7 @@ public class TownController {
         Town wroclaw = new Town("Wrocław");
         Town lodz = new Town("Lódź");
         Town warszawa = new Town("Warszawa");
+
 
 
 

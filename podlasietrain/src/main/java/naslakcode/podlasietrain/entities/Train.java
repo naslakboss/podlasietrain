@@ -3,6 +3,8 @@ package naslakcode.podlasietrain.entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Objects;
+
 @Document
 public class Train {
 
@@ -19,6 +21,7 @@ public class Train {
         this.startTown = startTown;
         this.targetTown = targetTown;
     }
+
 
     public String getConnectionName() {
         return connectionName;
@@ -50,6 +53,16 @@ public class Train {
 
     public void setTargetTown(Town targetTown) {
         this.targetTown = targetTown;
+    }
+
+    @Override
+    public String toString() {
+        return "Train{" +
+                "weight=" + weight +
+                ", startTown=" + startTown +
+                ", targetTown=" + targetTown +
+                ", connectionName='" + connectionName + '\'' +
+                '}';
     }
 }
 

@@ -9,6 +9,7 @@ import naslakcode.podlasietrain.services.TownService;
 import naslakcode.podlasietrain.services.TrainService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.beans.Transient;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api")
@@ -41,24 +43,20 @@ public class TrainController {
         Town lodz = townService.findById("Lódź");
         Town warszawa = townService.findById("Warszawa");
 
-        Train krakat = new Train(2, krakow, katowice);
-        Train kralub = new Train(4, krakow, lublin);
-//        Train krawar = new Train(7, krakow, warszawa);
-//        Train katwro = new Train(4, katowice, wroclaw);
-//        Train wrolod = new Train(8, wroclaw, lodz);
-//        Train lodzwar = new Train(3, lodz, warszawa);
-//        Train lubwar = new Train(6, lublin, warszawa);
+        Train t1 = new Train(3, krakow, katowice);
+        Train t2 = new Train(5, krakow, warszawa);
 
-        krakow.addNeighbour(krakat);
-        krakow.addNeighbour(kralub);
-//        krakow.addNeighbour(krawar);
-//        katowice.addNeighbour(katwro);
-//        wroclaw.addNeighbour(wrolod);
-//        lodz.addNeighbour(lodzwar);
-//        lublin.addNeighbour(lubwar);
+        trainService.save(t1);
+        trainService.save(t2);
 
+        System.out.println(t1.getStartTown().getTrains());
+        System.out.println(t2.getStartTown().getTrains());
 
-        trainRepository.save(krakat);
+       krakow.addNeighbour(t1);
+//        krakow.addNeighbour(t2);
+
+        System.out.println(t1.getStartTown());
+
 
 
 

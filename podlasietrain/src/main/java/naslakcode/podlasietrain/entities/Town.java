@@ -67,13 +67,22 @@ public class Town implements Comparable<Town> {
         this.minDistance = minDistance;
     }
 
+//
+
     @Override
     public String toString() {
-        return name;
+        return "Town{" +
+                "name='" + name + '\'' +
+                ", trains=" + trains +
+                ", visited=" + visited +
+                ", previousTown=" + previousTown +
+                ", minDistance=" + minDistance +
+                '}';
     }
 
     @Override
     public int compareTo(Town otherTown) {
         return Double.compare(this.minDistance, otherTown.minDistance);
     }
+
 }
