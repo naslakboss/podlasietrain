@@ -8,7 +8,6 @@ import java.util.Objects;
 @Document
 public class Train {
 
-
     private int weight;
     private Town startTown;
     private Town targetTown;
@@ -55,14 +54,5 @@ public class Train {
         this.targetTown = targetTown;
     }
 
-    @Override
-    public String toString() {
-        return "Train{" +
-                "weight=" + weight +
-                ", startTown=" + startTown +
-                ", targetTown=" + targetTown +
-                ", connectionName='" + connectionName + '\'' +
-                '}';
-    }
 }
 

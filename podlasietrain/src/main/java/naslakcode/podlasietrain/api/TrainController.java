@@ -3,13 +3,9 @@ package naslakcode.podlasietrain.api;
 import naslakcode.podlasietrain.entities.Algorithm;
 import naslakcode.podlasietrain.entities.Town;
 import naslakcode.podlasietrain.entities.Train;
-import naslakcode.podlasietrain.repositories.TownRepository;
 import naslakcode.podlasietrain.repositories.TrainRepository;
 import naslakcode.podlasietrain.services.TownService;
 import naslakcode.podlasietrain.services.TrainService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -42,30 +38,6 @@ public class TrainController {
         Town wroclaw = townService.findById("Wrocław");
         Town lodz = townService.findById("Lódź");
         Town warszawa = townService.findById("Warszawa");
-
-        Train t1 = new Train(3, krakow, katowice);
-        Train t2 = new Train(5, krakow, warszawa);
-
-        trainService.save(t1);
-        trainService.save(t2);
-
-        System.out.println(t1.getStartTown().getTrains());
-        System.out.println(t2.getStartTown().getTrains());
-
-       krakow.addNeighbour(t1);
-//        krakow.addNeighbour(t2);
-
-        System.out.println(t1.getStartTown());
-
-
-
-
-        Algorithm algorithm = new Algorithm();
-        algorithm.computePath(krakow);
-        System.out.println(algorithm.getShortestPathTo(warszawa));
-
-
-
 
     }
 
