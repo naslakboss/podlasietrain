@@ -1,8 +1,10 @@
 package naslakcode.podlasietrain.services;
 
+
 import naslakcode.podlasietrain.entities.Town;
 import naslakcode.podlasietrain.repositories.TownRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.util.BsonUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,12 +24,21 @@ public class TownService {
        return townRepository.saveAll(townToAdd);
     }
 
-    public Town findById(String id) {
-        Optional<Town> getTown = townRepository.findById(id);
-        if(getTown.isPresent()){
-             return getTown.get();
-        }
-        return new Town("id");
+
+    public Town save(Town town) {
+        return townRepository.save(town);
     }
 
+    public Town findById(String name) {
+        Optional<Town> checkIfExist = townRepository.findById(name);
+        if(!checkIfExist.isPresent()){
+            System.out.println("Town doesn't exist in database");
+        }
+        Town findedTown = checkIfExist.get();
+        return findedTown;
+    }
+
+    public void deleteById(String name){
+        townRepository.delete(findById(name));
+    }
 }

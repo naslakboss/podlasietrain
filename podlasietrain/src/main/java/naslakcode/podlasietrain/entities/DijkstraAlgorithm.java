@@ -1,4 +1,4 @@
-package naslakcode.podlasietrain.entitiestest;
+package naslakcode.podlasietrain.entities;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,7 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 
 
 public class DijkstraAlgorithm {
@@ -94,7 +93,7 @@ public class DijkstraAlgorithm {
         return settledNodes.contains(town);
     }
 
-    private int getShortestDistance(Town destination) {
+    public int getShortestDistance(Town destination) {
         Integer d = distance.get(destination);
         if (d == null) {
             return Integer.MAX_VALUE;

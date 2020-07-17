@@ -3,56 +3,55 @@ package naslakcode.podlasietrain.entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Objects;
-
 @Document
 public class Train {
-
-    private int weight;
-    private Town startTown;
-    private Town targetTown;
     @Id
-    private String connectionName;
+    private  String id;
+    private  Town source;
+    private  Town destination;
+    private  int weight;
 
-    public Train(int weight, Town startTown, Town targetTown) {
-        this.connectionName = startTown.getName() + "-" + targetTown.getName();
+    public Train(String id, Town source, Town destination, int weight) {
+        this.id = id;
+        this.source = source;
+        this.destination = destination;
         this.weight = weight;
-        this.startTown = startTown;
-        this.targetTown = targetTown;
     }
 
-
-    public String getConnectionName() {
-        return connectionName;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setConnectionName(String connectionName) {
-        this.connectionName = connectionName;
+    public void setSource(Town source) {
+        this.source = source;
     }
 
-    public double getWeight() {
-        return weight;
+    public void setDestination(Town destination) {
+        this.destination = destination;
     }
 
     public void setWeight(int weight) {
         this.weight = weight;
     }
 
-    public Town getStartTown() {
-        return startTown;
+    public String getId() {
+        return id;
+    }
+    public Town getDestination() {
+        return destination;
     }
 
-    public void setStartTown(Town startTown) {
-        this.startTown = startTown;
+    public Town getSource() {
+        return source;
+    }
+    public int getWeight() {
+        return weight;
     }
 
-    public Town getTargetTown() {
-        return targetTown;
+    @Override
+    public String toString() {
+        return source + " " + destination;
     }
 
-    public void setTargetTown(Town targetTown) {
-        this.targetTown = targetTown;
-    }
 
 }
-

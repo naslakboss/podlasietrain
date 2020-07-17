@@ -1,5 +1,6 @@
 package naslakcode.podlasietrain.entities;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -7,10 +8,13 @@ import java.util.List;
 @Document
 public class Graph {
 
-    private List<Town> towns;
-    private List<Train> trains;
+    @Id
+    private String id;
+    private final List<Town> towns;
+    private final List<Train> trains;
 
-    public Graph(List<Town> towns, List<Train> trains) {
+    public Graph(String id, List<Town> towns, List<Train> trains) {
+        this.id = id;
         this.towns = towns;
         this.trains = trains;
     }
@@ -19,15 +23,10 @@ public class Graph {
         return towns;
     }
 
-    public void setTowns(List<Town> towns) {
-        this.towns = towns;
-    }
-
     public List<Train> getTrains() {
         return trains;
     }
 
-    public void setTrains(List<Train> trains) {
-        this.trains = trains;
-    }
+
+
 }
