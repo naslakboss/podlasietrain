@@ -7,6 +7,7 @@ import naslakcode.podlasietrain.services.TownService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,7 +45,7 @@ public class TownController {
     }
 
     @PostMapping("add")
-    public Town addTown(@RequestBody Town town){
+    public Town addTown(@RequestBody @Validated  Town town){
        return townService.save(town);
     }
 

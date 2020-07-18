@@ -9,13 +9,11 @@ import naslakcode.podlasietrain.repositories.TownRepository;
 import naslakcode.podlasietrain.services.TownService;
 import naslakcode.podlasietrain.services.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+
+import java.util.*;
 
 @RestController
 @RequestMapping("/trains")
@@ -29,6 +27,8 @@ public class TrainController {
 
     @Autowired
     TownService townService;
+
+
 
 //    @EventListener(ApplicationReadyEvent.class)
 //    public void fillDB(){
@@ -76,11 +76,13 @@ public class TrainController {
         algorithm.execute(startTown);
         LinkedList<Town> path = algorithm.getPath(destinationTown);
 
-        System.out.println(algorithm.getShortestDistance(destinationTown));
+        int distance = algorithm.getShortestDistance(destinationTown);
+        String sDistance = String.valueOf(distance);
 
+        Town fakeTown = new Town("distance", sDistance);
+        path.add(fakeTown);
 
-
-        for(Town town : path){
+        for(Object town : path){
             System.out.println(town);
         }
         return path;
@@ -95,17 +97,17 @@ public class TrainController {
     @PostMapping("/add")
     public Train addTrain(@RequestBody Train train){
 
-        String sourceTownName = train.getSource().getName();
-        String destinationTownName = train.getDestination().getName();
-
-        if(!townRepository.findById(sourceTownName).isPresent()){
-            System.out.println("Source town is not valid");
-        }
-        if(!townRepository.findById(destinationTownName).isPresent()){
-            System.out.println("Destination town is not valid");
-        }
-
-         return  trainService.save(train);
+//        String sourceTownName = train.getSource().getName();
+//        String destinationTownName = train.getDestination().getName();
+//
+//        if(!townRepository.findById(sourceTownName).isPresent()){
+//            System.out.println("Source town is not valid");
+//        }
+//        if(!townRepository.findById(destinationTownName).isPresent()){
+//            System.out.println("Destination town is not valid");
+//        }
+// ! Stworzyć custom validator!
+        return  trainService.save(train);
     }
 
     @PatchMapping("/patch")
