@@ -9,10 +9,9 @@ import naslakcode.podlasietrain.repositories.TownRepository;
 import naslakcode.podlasietrain.services.TownService;
 import naslakcode.podlasietrain.services.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.web.bind.annotation.*;
-
-
+import javax.validation.Valid;
 import java.util.*;
 
 @RestController
@@ -95,18 +94,21 @@ public class TrainController {
     }
 
     @PostMapping("/add")
-    public Train addTrain(@RequestBody Train train){
+    public Train addTrain(@RequestBody @Valid Train train){
 
 //        String sourceTownName = train.getSource().getName();
 //        String destinationTownName = train.getDestination().getName();
 //
 //        if(!townRepository.findById(sourceTownName).isPresent()){
 //            System.out.println("Source town is not valid");
+//            throw new NotF();
 //        }
 //        if(!townRepository.findById(destinationTownName).isPresent()){
 //            System.out.println("Destination town is not valid");
 //        }
 // ! Stworzyć custom validator!
+
+
         return  trainService.save(train);
     }
 

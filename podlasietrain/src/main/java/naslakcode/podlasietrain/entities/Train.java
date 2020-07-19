@@ -1,15 +1,23 @@
 package naslakcode.podlasietrain.entities;
 
+import naslakcode.podlasietrain.validators.SameTowns;
+import naslakcode.podlasietrain.validators.UniqueTrain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
+@SameTowns
+@UniqueTrain
 public class Train {
+
     @Id
     private  String id;
     private  Town source;
     private  Town destination;
     private  int weight;
+
+    public Train() {
+    }
 
     public Train(String id, Town source, Town destination, int weight) {
         this.id = id;

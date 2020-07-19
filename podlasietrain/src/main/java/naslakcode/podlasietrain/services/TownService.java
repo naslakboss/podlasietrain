@@ -41,4 +41,7 @@ public class TownService {
     public void deleteById(String name){
         townRepository.delete(findById(name));
     }
+    public boolean isExistById(String townName){
+        return townRepository.existsById(townName);
+    }
 }

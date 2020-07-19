@@ -15,6 +15,9 @@ public class TrainService {
     @Autowired
     TrainRepository trainRepository;
 
+    @Autowired
+    TownService townService;
+
     public Train save(Train train){
         return trainRepository.save(train);
     }
@@ -34,5 +37,11 @@ public class TrainService {
     public void deleteById(String id) {
         Train trainToDelete = findById(id);
         trainRepository.delete(trainToDelete);
+    }
+
+    public boolean isExist(Train train){
+        String startName = train.getSource().getName();
+        String destinationName = train.getDestination().getName();
+       return townService.isExistById(startName) && townService.isExistById(destinationName);
     }
 }
