@@ -1,15 +1,19 @@
 package naslakcode.podlasietrain.entities;
 
 
+import naslakcode.podlasietrain.validators.townvalidators.UniqueTown;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
+@UniqueTown
 public class Town {
      private String id;
     @Id
      private String name;
 
+    public Town() {
+    }
 
     public Town(String id, String name) {
         this.id = id;

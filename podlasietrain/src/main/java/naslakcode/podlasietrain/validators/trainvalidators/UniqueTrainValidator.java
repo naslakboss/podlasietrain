@@ -16,17 +16,11 @@ public class UniqueTrainValidator implements ConstraintValidator<UniqueTrain, Tr
     @Autowired
     TrainService trainService;
 
-    @Autowired
-    TownService townService;
-
     @Override
-    public void initialize(UniqueTrain constraintAnnotation) {
-
-    }
+    public void initialize(UniqueTrain constraintAnnotation) {}
 
     @Override
     public boolean isValid(Train train, ConstraintValidatorContext context) {
-
         return !trainService.isExist(train);
     }
 }

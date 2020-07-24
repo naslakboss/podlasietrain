@@ -2,6 +2,7 @@ package naslakcode.podlasietrain.validators.trainvalidators;
 
 import naslakcode.podlasietrain.entities.Train;
 import naslakcode.podlasietrain.services.TrainService;
+import naslakcode.podlasietrain.validators.trainvalidators.SameTowns;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +17,7 @@ public class SameTownsValidator implements ConstraintValidator<SameTowns, Train>
     TrainService trainService;
 
     @Override
-    public void initialize(SameTowns constraintAnnotation) {
-
-    }
+    public void initialize(SameTowns constraintAnnotation) {}
 
 
     @Override

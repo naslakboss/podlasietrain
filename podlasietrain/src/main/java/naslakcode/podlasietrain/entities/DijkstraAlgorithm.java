@@ -102,10 +102,6 @@ public class DijkstraAlgorithm {
         }
     }
 
-    /*
-     * This method returns the path from the source to the selected target and
-     * NULL if no path exists
-     */
     public LinkedList<Town> getPath(Town target) {
         LinkedList<Town> path = new LinkedList<Town>();
         Town step = target;

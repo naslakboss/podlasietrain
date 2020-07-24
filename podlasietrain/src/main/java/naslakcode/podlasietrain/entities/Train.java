@@ -1,9 +1,12 @@
 package naslakcode.podlasietrain.entities;
 
-import naslakcode.podlasietrain.validators.SameTowns;
-import naslakcode.podlasietrain.validators.UniqueTrain;
+import naslakcode.podlasietrain.validators.trainvalidators.SameTowns;
+import naslakcode.podlasietrain.validators.trainvalidators.UniqueTrain;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.Objects;
 
 @Document
 @SameTowns
@@ -14,6 +17,7 @@ public class Train {
     private  String id;
     private  Town source;
     private  Town destination;
+    @Range(min = 1, max = 40000)
     private  int weight;
 
     public Train() {
@@ -61,5 +65,19 @@ public class Train {
         return source + " " + destination;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Train train = (Train) o;
+        return weight == train.weight &&
+                Objects.equals(id, train.id) &&
+                Objects.equals(source, train.source) &&
+                Objects.equals(destination, train.destination);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, source, destination, weight);
+    }
 }

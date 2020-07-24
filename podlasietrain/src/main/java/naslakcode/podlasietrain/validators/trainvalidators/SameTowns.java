@@ -1,7 +1,5 @@
 package naslakcode.podlasietrain.validators.trainvalidators;
 
-import naslakcode.podlasietrain.validators.trainvalidators.SameTownsValidator;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.ElementType;

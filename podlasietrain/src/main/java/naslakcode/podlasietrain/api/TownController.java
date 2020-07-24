@@ -7,6 +7,8 @@ import naslakcode.podlasietrain.services.TownService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,33 +41,32 @@ public class TownController {
 //    }
     // Fill database fast
 
-    @GetMapping("/show-all")
-    public List<Town> showAllTowns(){
-        return townService.findAll();
+    @GetMapping()
+    public ResponseEntity<List<Town>> getAllTowns(){
+        return ResponseEntity.ok(townService.findAll());
     }
 
-    @PostMapping("add")
-    public Town addTown(@RequestBody @Validated  Town town){
-       return townService.save(town);
+    @GetMapping("/{name}")
+    public ResponseEntity<Town> getTownById(@PathVariable String name){
+        return ResponseEntity.ok(townService.findById(name));
     }
 
-    @PatchMapping("/patch")
-    public Town uploadTown(@RequestParam ("name") String name, @RequestBody Town town){
-        Town patchedTown = townService.findById(name);
-        if(town.getId() != null) {
-            patchedTown.setId(town.getId());
-        }
-        if(town.getName() != null) {
-            patchedTown.setName(town.getName());
-        }
-        townService.save(patchedTown);
-        return patchedTown;
+    @PostMapping("/add")
+    public ResponseEntity<Town> createNewTown(@RequestBody @Validated Town town){
+        Town createdTown = townService.save(town);
+        return createdTown != null ? ResponseEntity.ok(createdTown) : ResponseEntity.badRequest().body(null);
     }
 
-    @DeleteMapping("delete")
-    public void deleteTown(@RequestParam ("name") String name){
-        Town townToDelete = townService.findById(name);
+    @PostMapping("/patch/{name}")
+    public ResponseEntity<Town> updateTown(@PathVariable String name, @RequestBody Town town){
+        Town updatedTown = townService.uploadTown(town, name);
+        return updatedTown != null ? ResponseEntity.ok(updatedTown) : ResponseEntity.badRequest().body(null);
+    }
+
+    @DeleteMapping("/delete/{name}")
+    public ResponseEntity deleteTown(@PathVariable String name){
         townService.deleteById(name);
+         return  ResponseEntity.ok("Town deleted successfully");
     }
 
 

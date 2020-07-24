@@ -8,8 +8,13 @@ import naslakcode.podlasietrain.entities.Train;
 import naslakcode.podlasietrain.repositories.TownRepository;
 import naslakcode.podlasietrain.services.TownService;
 import naslakcode.podlasietrain.services.TrainService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.*;
@@ -59,81 +64,42 @@ public class TrainController {
 //        trainService.save(test);
 //
 //    }
-    // Auto db
+    // fill db
+
+
+
+    @GetMapping()
+    public ResponseEntity<List<Train>> getAllTrains(){
+        return ResponseEntity.ok(trainService.findALl());
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Train> getTrainById(@PathVariable String id){
+        return ResponseEntity.ok(trainService.findById(id));
+    }
+
+    @PostMapping(value = "/add")
+    public ResponseEntity<Train> addNewTrain(@RequestBody @Validated Train train){
+        Train newTrain = trainService.save(train);
+        return newTrain != null ? ResponseEntity.ok(newTrain) : ResponseEntity.badRequest().body(null);
+    }
+    @PostMapping("/patch/{id}")
+    public ResponseEntity<Train> uploadTrain(@PathVariable String id, @RequestBody Train train){
+        Train uploadedTrain = trainService.uploadById(id, train);
+        return uploadedTrain != null ? ResponseEntity.ok(uploadedTrain) : ResponseEntity.badRequest().body(null);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteTrain(@PathVariable String id){
+        trainService.deleteById(id);
+        return ResponseEntity.ok("Train deleted successfully");
+    }
 
     @GetMapping("/shortest_path")
-    public LinkedList<Town> showShortestPath(@RequestParam ("start") String start,
-             @RequestParam ("destination") String destination){
+    public ResponseEntity<LinkedList<Town>> showShortestPath(@RequestParam ("start") String start,
+                                             @RequestParam ("destination") String destination){
 
-        List<Town> townList = townService.findAll();
-        List<Train> trainList = trainService.findALl();
-
-        Graph graph = new Graph("graff", townList, trainList);
-        DijkstraAlgorithm algorithm = new DijkstraAlgorithm(graph);
-        Town startTown = townService.findById(start);
-        Town destinationTown = townService.findById(destination);
-        algorithm.execute(startTown);
-        LinkedList<Town> path = algorithm.getPath(destinationTown);
-
-        int distance = algorithm.getShortestDistance(destinationTown);
-        String sDistance = String.valueOf(distance);
-
-        Town fakeTown = new Town("distance", sDistance);
-        path.add(fakeTown);
-
-        for(Object town : path){
-            System.out.println(town);
-        }
-        return path;
-
-    }
-
-    @GetMapping("/show-all")
-    public List<Train> showAllTrains(){
-        return trainService.findALl();
-    }
-
-    @PostMapping("/add")
-    public Train addTrain(@RequestBody @Valid Train train){
-
-//        String sourceTownName = train.getSource().getName();
-//        String destinationTownName = train.getDestination().getName();
-//
-//        if(!townRepository.findById(sourceTownName).isPresent()){
-//            System.out.println("Source town is not valid");
-//            throw new NotF();
-//        }
-//        if(!townRepository.findById(destinationTownName).isPresent()){
-//            System.out.println("Destination town is not valid");
-//        }
-// ! Stworzyć custom validator!
-
-
-        return  trainService.save(train);
-    }
-
-    @PatchMapping("/patch")
-    public Train uploadTrain(@RequestParam ("id") String id, @RequestBody Train train){
-        Train uploadedTrain = trainService.findById(id);
-        if(train.getId() != null) {
-            uploadedTrain.setId(train.getId());
-        }
-        if(train.getSource() != null) {
-            uploadedTrain.setSource(train.getSource());
-        }
-        if(train.getDestination() != null) {
-            uploadedTrain.setDestination(train.getDestination());
-        }
-        if(train.getWeight() != 0) {
-            uploadedTrain.setWeight(train.getWeight());
-        }
-        trainService.save(uploadedTrain);
-        return uploadedTrain;
-    }
-
-    @DeleteMapping("/delete")
-    public void deleteTrain(@RequestParam ("id") String id){
-        trainService.deleteById(id);
+        return ResponseEntity.ok(trainService.findShortestPath(start, destination));
     }
 
 
