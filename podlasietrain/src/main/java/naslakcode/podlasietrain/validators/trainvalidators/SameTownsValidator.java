@@ -1,4 +1,4 @@
-package naslakcode.podlasietrain.validators;
+package naslakcode.podlasietrain.validators.trainvalidators;
 
 import naslakcode.podlasietrain.entities.Train;
 import naslakcode.podlasietrain.services.TrainService;

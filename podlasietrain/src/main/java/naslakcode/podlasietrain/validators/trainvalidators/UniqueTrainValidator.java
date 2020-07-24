@@ -1,9 +1,9 @@
-package naslakcode.podlasietrain.validators;
+package naslakcode.podlasietrain.validators.trainvalidators;
 
-import naslakcode.podlasietrain.entities.Town;
 import naslakcode.podlasietrain.entities.Train;
 import naslakcode.podlasietrain.services.TownService;
 import naslakcode.podlasietrain.services.TrainService;
+import naslakcode.podlasietrain.validators.trainvalidators.UniqueTrain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

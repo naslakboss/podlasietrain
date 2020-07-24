@@ -1,4 +1,4 @@
-package naslakcode.podlasietrain.validators;
+package naslakcode.podlasietrain.validators.trainvalidators;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
