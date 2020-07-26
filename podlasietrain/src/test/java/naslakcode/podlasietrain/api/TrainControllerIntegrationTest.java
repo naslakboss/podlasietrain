@@ -76,7 +76,7 @@ public class TrainControllerIntegrationTest {
     }
 
     @Test
-    public void shouldFindAllTrainsById() throws Exception {
+    public void shouldFindAllTrains() throws Exception {
         Town zakopane = new Town("ZAK", "Zakopane");
         Town gdansk = new Town("GDA", "Gdansk");
         Town katowice = new Town("KAT", "Katowice");

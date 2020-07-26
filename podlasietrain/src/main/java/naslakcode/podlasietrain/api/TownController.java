@@ -41,6 +41,7 @@ public class TownController {
 //    }
     // Fill database fast
 
+
     @GetMapping()
     public ResponseEntity<List<Town>> getAllTowns(){
         return ResponseEntity.ok(townService.findAll());

@@ -10,6 +10,8 @@ import naslakcode.podlasietrain.services.TownService;
 import naslakcode.podlasietrain.services.TrainService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -65,8 +67,6 @@ public class TrainController {
 //
 //    }
     // fill db
-
-
 
     @GetMapping()
     public ResponseEntity<List<Train>> getAllTrains(){
